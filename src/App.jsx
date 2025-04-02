@@ -1,10 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import Products from "./pages/Products";
-import ProductDetail from "./pages/ProductDetail";
 import Owner from "./pages/Owner";
+import HomeUser from "./pages/HomeUser";
+import HomeAdmin from "./pages/HomeAdmin";
+// import Contact from "./pages/Contact";
+// import Products from "./pages/Products";
+// import ProductDetail from "./pages/ProductDetail";
+
 
 const router = createBrowserRouter([
   {
@@ -18,15 +21,17 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "owner", element: <Owner /> },
-      { path: "contact", element: <Contact /> },
-      {
-        path: "products",
-        element: <Products />,
-      },
-      {
-        path: "products/:productId",
-        element: <ProductDetail />,
-      },
+      { path: "home-user", element: <HomeUser/>},
+      { path: "home-admin", element: <HomeAdmin/>},
+      // { path: "contact", element: <Contact /> },
+      // {
+      //   path: "products",
+      //   element: <Products />,
+      // },
+      // {
+      //   path: "products/:productId",
+      //   element: <ProductDetail />,
+      // },
     ],
   },
 ]);
