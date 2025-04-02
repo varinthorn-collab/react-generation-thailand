@@ -26,8 +26,7 @@ export const createMembers = async (members) => {
 
 export const deleteMembers = async (id) => {
     try {
-        const res =await  axios.post(
-            `https://jsd5-mock-backend.onrender.com/members/${id}`);
+        const res = await axios.delete (`https://jsd5-mock-backend.onrender.com/member/${id}`);
         return res.data;
     }
     catch (error) {

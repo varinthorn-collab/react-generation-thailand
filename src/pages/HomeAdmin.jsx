@@ -5,11 +5,12 @@ import { getMembers,createMembers,deleteMembers } from "../apiData/MembersApi";
 
 const HomeAdmin = () => {
     const [members, setMembers] = useState([]);
-    const [formData, setFormData] = useState({ name: "", lastName: "", position: "" });
+    const [formData, setFormData] = useState({ name: "", lastname: "", position: "" });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [create, setCreate] = useState(false);
     const [deleting, setDeleting] = useState(false);
+    // const [deletingId, setDeletingId] = useState(null);
     
     useEffect(() => {
         fetchMembers();
@@ -32,7 +33,7 @@ const HomeAdmin = () => {
         try {
             await createMembers(formData)
             fetchMembers() //refresh table
-            setFormData({ name: "", lastName: "", position: "" }); // reset form
+            setFormData({ name: "", lastname: "", position: "" }); // reset form
         } catch (error) {
             setError("failed to create data")
             console.error(error);
@@ -42,9 +43,11 @@ const HomeAdmin = () => {
     }
 
     const handleDelete = async (id) => {
+        setDeleting(true)
         try {
             await deleteMembers(id)
             fetchMembers() //refresh table
+            // setMembers(members.filter(member => member.id !== id))
         } catch (error) {
             setError("failed to delete data")
             console.error(error);
@@ -53,24 +56,29 @@ const HomeAdmin = () => {
         }
     }
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
     return (
-        <div>
+        <div className ="text-center">
             <Layout pageTitle=" - Admin Section " />
 
             {loading && <p className ="text-center"> Loading ...</p>}
             {error && <p className="text-center text-red-500"> {error}</p>}
 
-            <h2>Create User Here</h2>
-            <form onSubmit={handleCreate}>
-                <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleCreate} required />
-                <input type="text" name="lastname" placeholder="Last Name" value={formData.lastname} onChange={handleCreate} required />
-                <input type="text" name="position" placeholder="Position" value={formData.position} onChange={handleCreate} required />
-                <button type="submit" disabled={create}>
-                {create ? "Creating..." : "Add Employee"}
+            <h2 className ="my-8">Create User Here</h2>
+            <form >
+                <input type="text" name="name" placeholder="Name" onChange={handleInputChange} value={formData.name} required />
+                <input type="text" name="lastname" placeholder="LastName" onChange={handleInputChange} value={formData.lastname} required  />
+                <input type="text" name="position" placeholder="Position" onChange={handleInputChange} value={formData.position} required  />
+                <button onClick={handleCreate} disabled={create}>
+                Save
                 </button>
             </form>
 
-            <h2>User List</h2>
+
             <table border="5" className ="my-8 mx-auto text-center border-gray-500">
                 <thead>
                     <tr>
@@ -87,8 +95,8 @@ const HomeAdmin = () => {
                         <td>{member.lastname}</td>
                         <td>{member.position}</td>
                         <td>
-                        <button onClick={() => handleDelete(member.id)} disabled={deleting}>
-                            {deleting ? "Deleting..." : "Delete"}
+                        <button onClick={() => {handleDelete(member.id)}} disabled={deleting}>
+                            Delete
                         </button>
                         </td>
                     </tr>
@@ -96,7 +104,7 @@ const HomeAdmin = () => {
                 </tbody>
             </table>
         </div>
-    
+
 
     );
 };
