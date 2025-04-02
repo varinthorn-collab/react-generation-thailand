@@ -10,7 +10,7 @@ const HomeAdmin = () => {
     const [error, setError] = useState(null);
     const [create, setCreate] = useState(false);
     const [deleting, setDeleting] = useState(false);
-    // const [deletingId, setDeletingId] = useState(null);
+
     
     useEffect(() => {
         fetchMembers();
@@ -43,11 +43,9 @@ const HomeAdmin = () => {
     }
 
     const handleDelete = async (id) => {
-        setDeleting(true)
         try {
             await deleteMembers(id)
             fetchMembers() //refresh table
-            // setMembers(members.filter(member => member.id !== id))
         } catch (error) {
             setError("failed to delete data")
             console.error(error);
@@ -61,6 +59,8 @@ const HomeAdmin = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    //{ ...formData } creates a copy of the existing formData object to preserve the other fields.
+
     return (
         <div className ="text-center">
             <Layout pageTitle=" - Admin Section " />
@@ -68,12 +68,12 @@ const HomeAdmin = () => {
             {loading && <p className ="text-center"> Loading ...</p>}
             {error && <p className="text-center text-red-500"> {error}</p>}
 
-            <h2 className ="my-8">Create User Here</h2>
-            <form >
-                <input type="text" name="name" placeholder="Name" onChange={handleInputChange} value={formData.name} required />
-                <input type="text" name="lastname" placeholder="LastName" onChange={handleInputChange} value={formData.lastname} required  />
-                <input type="text" name="position" placeholder="Position" onChange={handleInputChange} value={formData.position} required  />
-                <button onClick={handleCreate} disabled={create}>
+            <h2 className ="my-8 font-bold ">Create User Here</h2>
+            <form>
+                <input type="text" name="name" placeholder="Name" onChange={handleInputChange} value={formData.name} className ="border border-gray-500 mx-4 rounded-md" required />
+                <input type="text" name="lastname" placeholder="LastName" onChange={handleInputChange} value={formData.lastname} className ="border border-gray-500 mx-4 rounded-md" required  />
+                <input type="text" name="position" placeholder="Position" onChange={handleInputChange} value={formData.position} className ="border border-gray-500 mx-4 rounded-md" required  />
+                <button onClick={handleCreate} disabled={create} className="px-4 py-2 mx-4 bg-teal-500 text-white rounded-md hover:bg-teal-700 cursor-pointer transition">
                 Save
                 </button>
             </form>
@@ -95,7 +95,7 @@ const HomeAdmin = () => {
                         <td>{member.lastname}</td>
                         <td>{member.position}</td>
                         <td>
-                        <button onClick={() => {handleDelete(member.id)}} disabled={deleting}>
+                        <button onClick={() => {handleDelete(member.id)}} disabled={deleting} className="px-4 py-2 mx-4 my-2 bg-red-500 text-white rounded-md hover:bg-red-700 cursor-pointer transition">
                             Delete
                         </button>
                         </td>

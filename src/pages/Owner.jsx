@@ -5,7 +5,7 @@ const Owner = () => {
     <div className="text-center p-4 bg-white rounded-md shadow-md">
       <h1 className="text-2xl font-bold mb-2">Earn - GenMate C - 33</h1>
       <img
-              src="https://placehold.co/400x400"
+              src="/src/assets/NationalGeographic_2572187_3x2.avif"
               alt="Earn"
               class="mx-auto py-4 lg:h-[16rem]"
         />
