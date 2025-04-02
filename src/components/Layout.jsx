@@ -12,11 +12,11 @@ const Layout = () => {
             </Link>
           </li>
           <li>
-            <Link to="/about" className="hover:text-yellow-400">
-              About
+            <Link to="/owner" className="hover:text-yellow-400">
+              Owner
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/contact" className="hover:text-yellow-400">
               Contact
             </Link>
@@ -25,7 +25,7 @@ const Layout = () => {
             <Link to="/products" className="hover:text-yellow-400">
               Products
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
       <div className="p-6 max-w-4xl mx-auto w-full">
