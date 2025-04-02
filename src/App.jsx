@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./components/Layout";
+import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Owner from "./pages/Owner";
 import HomeUser from "./pages/HomeUser";
@@ -12,7 +12,7 @@ import HomeAdmin from "./pages/HomeAdmin";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <NavBar />,
     errorElement: (
       <div className="min-h-screen flex justify-center items-center">
         <h1 className="text-4xl">404 - Page Not Found 🧙‍♂️</h1>
